@@ -1,34 +1,79 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  if (!sessionStorage.getItem("user")) {
-  alert("Please login again.");
-  window.location.href = "login.html";
-}
+
   <meta charset="UTF-8">
   <title>Your Zodiac Fortune</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    // Redirect to login if not logged in
+    if (sessionStorage.getItem("user") !== "loggedIn") {
+      alert("Please login again");
+      window.location.href = "login.html";
+    }
+  </script>
 </head>
 <body>
   <h2>Your Daily Fortune 🌠</h2>
+
   <p id="zodiacSign">Zodiac: ...</p>
   <p id="fortuneText">Your fortune will appear here.</p>
-  <button onclick="logout()">Log Out</button>
-  const username = localStorage.getItem("username");
-if (!username) {
-  alert("Please login again.");
-  window.location.href = "login.html";
-}
-<span id="zodiacDisplay">...</span>
-<p id="fortuneDisplay">Your fortune will appear here.</p>
-  <script src="script.js"></script>
-  localStorage.setItem("username", enteredUsername);
-localStorage.setItem("birthdate", enteredBirthdate);
-if (!sessionStorage.getItem("user")) {
-  alert("Please login again.");
-  window.location.href = "login.html";
-}
 
+  <button onclick="logout()">Log Out</button>
+
+  <script>
+    // Simulate getting data (you can replace this with real logic)
+    const username = localStorage.getItem("username");
+    const birthdate = localStorage.getItem("birthdate");
+
+    if (!username || !birthdate) {
+      alert("Please login again.");
+      window.location.href = "login.html";
+    }
+
+    // Simple zodiac logic (you can replace with your own)
+    function getZodiacSign(date) {
+      const d = new Date(date);
+      const month = d.getUTCMonth() + 1;
+      const day = d.getUTCDate();
+
+      const signs = [
+        ["Capricorn", 1, 19],
+        ["Aquarius", 2, 18],
+        ["Pisces", 3, 20],
+        ["Aries", 4, 19],
+        ["Taurus", 5, 20],
+        ["Gemini", 6, 20],
+        ["Cancer", 7, 22],
+        ["Leo", 8, 22],
+        ["Virgo", 9, 22],
+        ["Libra", 10, 22],
+        ["Scorpio", 11, 21],
+        ["Sagittarius", 12, 21],
+        ["Capricorn", 12, 31]
+      ];
+
+      for (let i = 0; i < signs.length; i++) {
+        if (
+          (month === signs[i][1] && day <= signs[i][2]) ||
+          (month === signs[i + 1]?.[1] && day <= signs[i + 1][2])
+        ) {
+          return signs[i][0];
+        }
+      }
+
+      return "Unknown";
+    }
+
+    const zodiac = getZodiacSign(birthdate);
+    document.getElementById("zodiacSign").textContent = `Zodiac: ${zodiac}`;
+    document.getElementById("fortuneText").textContent = `${zodiac}, your stars say it's a great day to shine ✨`;
+
+    function logout() {
+      sessionStorage.clear();
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
 </body>
 </html>
