@@ -17,6 +17,14 @@
     <input type="text" placeholder="Username" required><br>
     <input type="password" placeholder="Password" required><br>
     <button type="submit">Log In</button>
+    // After successful login
+    localStorage.setItem("username", enteredUsername);
+    localStorage.setItem("birthdate", enteredBirthdate); 
+    // if used
+    // Then redirect:
+    window.location.href = "fortune.html";
+    localStorage.setItem("username", enteredUsername);
+localStorage.setItem("birthdate", enteredBirthdate);
   </form>
 </body>
 </html>

@@ -10,8 +10,15 @@
   <p id="zodiacSign">Zodiac: ...</p>
   <p id="fortuneText">Your fortune will appear here.</p>
   <button onclick="logout()">Log Out</button>
+  const username = localStorage.getItem("username");
+if (!username) {
+  alert("Please login again.");
+  window.location.href = "login.html";
+}
 <span id="zodiacDisplay">...</span>
 <p id="fortuneDisplay">Your fortune will appear here.</p>
   <script src="script.js"></script>
+  localStorage.setItem("username", enteredUsername);
+localStorage.setItem("birthdate", enteredBirthdate);
 </body>
 </html>
