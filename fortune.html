@@ -1,6 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  if (!sessionStorage.getItem("user")) {
+  alert("Please login again.");
+  window.location.href = "login.html";
+}
   <meta charset="UTF-8">
   <title>Your Zodiac Fortune</title>
   <link rel="stylesheet" href="style.css">
