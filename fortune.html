@@ -20,5 +20,10 @@ if (!username) {
   <script src="script.js"></script>
   localStorage.setItem("username", enteredUsername);
 localStorage.setItem("birthdate", enteredBirthdate);
+if (!sessionStorage.getItem("user")) {
+  alert("Please login again.");
+  window.location.href = "login.html";
+}
+
 </body>
 </html>

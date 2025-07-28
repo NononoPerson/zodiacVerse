@@ -18,3 +18,8 @@
 </html>
 <script src="script.js"></script>
 <p id="signupMessage"></p>
+if (!sessionStorage.getItem("user")) {
+  alert("Please login again.");
+  window.location.href = "login.html";
+}
+
