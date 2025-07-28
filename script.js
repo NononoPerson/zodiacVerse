@@ -71,22 +71,49 @@ document.getElementById('loginForm')?.addEventListener('submit', function (e) {
     loginMsg.textContent = "❌ Incorrect username or password!";
   }
 });
-function getFortune(zodiac) {
-  const fortunes = {
-    Aries: "Embrace your adventurous spirit today — risks might lead to big rewards.",
-    Taurus: "Patience will win you respect. Steady persistence beats dramatic flair.",
-    Gemini: "Conversations spark breakthroughs. Share your thoughts boldly.",
-    Cancer: "Protect your energy — not everyone deserves your kindness today.",
-    Leo: "You’re the star of the show, but don’t forget to lift others up too.",
-    Virgo: "Details matter. Fine-tune your work and watch success follow.",
-    Libra: "Seek balance, but make decisions swiftly — indecision clouds clarity.",
-    Scorpio: "Trust your instincts. Something mysterious may work in your favor.",
-    Sagittarius: "Explore new ideas. Your curiosity unlocks opportunity.",
-    Capricorn: "Discipline will be tested — stay focused on long-term goals.",
-    Aquarius: "Innovate. Your unique view could shift someone’s perspective.",
-    Pisces: "Creativity flows strongly — dive into something expressive today."
-  };
+// Step 1: Get birth date from localStorage
+const birthDate = localStorage.getItem("birthDate");
 
-  return fortunes[zodiac] || "The stars are quiet today. Tune in again later.";
+// Step 2: Zodiac calculation
+function getZodiacSign(dateStr) {
+  const date = new Date(dateStr);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+
+  if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) return "Aries";
+  if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) return "Taurus";
+  if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) return "Gemini";
+  if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) return "Cancer";
+  if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) return "Leo";
+  if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) return "Virgo";
+  if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) return "Libra";
+  if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) return "Scorpio";
+  if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) return "Sagittarius";
+  if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) return "Capricorn";
+  if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) return "Aquarius";
+  if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) return "Pisces";
+  return "Unknown";
+}
+
+// Step 3: Get a random fortune
+function getRandomFortune() {
+  const fortunes = [
+    "A lucky surprise is on the way.",
+    "Your kindness will bring blessings.",
+    "You will reach a goal very soon.",
+    "Your smile will change someone’s day.",
+    "Great things are coming your way!"
+  ];
+  return fortunes[Math.floor(Math.random() * fortunes.length)];
+}
+
+// Step 4: Check and display
+if (!birthDate) {
+  alert("Please login again.");
+  window.location.href = "login.html";
+} else {
+  const zodiacSign = getZodiacSign(birthDate);
+  document.getElementById("zodiacDisplay").innerText = zodiacSign;
+  document.getElementById("fortuneDisplay").innerText = getRandomFortune();
 }
 
